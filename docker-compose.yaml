@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    volumes:
+      # Mount your source code from your Mac
+      - .:/workspaces
+      # Persist the virtual environment inside Docker
+      - venv_data:/workspaces/.venv
+      # Internal Docker volume for uv cache (isolated from Mac home)
+      - uv_cache:/home/vscode/.cache/uv
+    
+    # Required to keep the container running
+    tty: true
+    stdin_open: true
+
+volumes:
+  venv_data:
+  uv_cache:
