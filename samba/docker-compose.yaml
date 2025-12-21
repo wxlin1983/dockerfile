@@ -1,0 +1,15 @@
+services:
+  samba:
+    image: dperson/samba
+    environment:
+      - USERID=${MY_UID}
+      - GROUPID=${MY_GID}
+      - TZ=Asia/Taipei
+    volumes:
+      - /path/to/host/folder:/mnt/share
+    ports:
+      - "445:445"
+    command:
+      - -u "${SAMBA_USER};${SAMBA_PASS};${MY_UID};${MY_GID}"
+      - -s "MyShare;/mnt/share;yes;no;no;${SAMBA_USER}"
+    restart: always

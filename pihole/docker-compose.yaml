@@ -6,15 +6,15 @@ services:
       - "53:53/tcp"
       - "53:53/udp"     # DNS
       - "80:80/tcp"      # HTTP
-      - "443:443/tcp"    # HTTPS (Self-signed)
+      - "443:443/tcp"    # HTTPS
     environment:
       TZ: 'Asia/Taipei'
-      FTLCONF_webserver_api_password: 'your_secure_password'
-      FTLCONF_dns_listeningMode: 'all' # Required for Docker bridge network
+      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
+      FTLCONF_dns_listeningMode: 'all'
     volumes:
       - './etc-pihole:/etc/pihole'
     cap_add:
-      - NET_ADMIN # Required for DHCP server
-      - SYS_TIME  # Required for NTP client
-      - SYS_NICE  # Optional: improves process priority
+      - NET_ADMIN # For DHCP
+      - SYS_TIME  # For NTP
+      - SYS_NICE  # For process priority
     restart: unless-stopped
