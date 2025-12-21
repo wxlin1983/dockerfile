@@ -1,0 +1,17 @@
+{
+    "name": "Node.js 22",
+    "dockerComposeFile": "../docker-compose.yaml",
+    "service": "app",
+    "workspaceFolder": "/workspaces",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "tamasfe.even-better-toml"
+            ],
+            "settings": {}
+        }
+    },
+    "remoteUser": "node"
+}

@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    volumes:
+      # Mount your source code from your Mac
+      - .:/workspaces
+      # Persist the node_modules inside Docker
+      - node_modules_data:/workspaces/node_modules
+      # Internal Docker volume for npm cache (isolated from Mac home)
+      - npm_cache:/home/node/.npm
+
+    # Required to keep the container running
+    tty: true
+    stdin_open: true
+
+volumes:
+  node_modules_data:
+  npm_cache:
