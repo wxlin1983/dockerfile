@@ -6,10 +6,12 @@ services:
       - GROUPID=${MY_GID}
       - TZ=Asia/Taipei
     volumes:
-      - /path/to/host/folder:/mnt/share
+      - /home/wlin/share:/mnt/share
     ports:
       - "445:445"
     command:
-      - -u "${SAMBA_USER};${SAMBA_PASS};${MY_UID};${MY_GID}"
-      - -s "MyShare;/mnt/share;yes;no;no;${SAMBA_USER}"
+      - "-u"
+      - "${SAMBA_USER};${SAMBA_PASS};${MY_UID};${MY_GID}"
+      - "-s"
+      - "MyShare;/mnt/share;yes;no;no;${SAMBA_USER}"
     restart: always
