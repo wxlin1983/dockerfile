@@ -2,16 +2,19 @@ services:
   samba:
     image: dperson/samba
     environment:
+      - TZ=Asia/Taipei
+      # 1. Permission Mapping
+      # Still required so the container can READ the files on your host disk
       - USERID=${MY_UID}
       - GROUPID=${MY_GID}
-      - TZ=Asia/Taipei
+      
+      # 2. Simplified Share Configuration
+      # Syntax: name;path;browsable;readonly;guest;users
+      # We set readonly=yes, guest=yes, users=all
+      - SHARE=MyShare;/mnt/share;yes;yes;yes;all
+      
     volumes:
       - /home/wlin/share:/mnt/share
     ports:
       - "445:445"
-    command:
-      - "-u"
-      - "${SAMBA_USER};${SAMBA_PASS};${MY_UID};${MY_GID}"
-      - "-s"
-      - "MyShare;/mnt/share;yes;no;no;${SAMBA_USER}"
     restart: always
