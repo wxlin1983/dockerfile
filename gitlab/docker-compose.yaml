@@ -2,11 +2,10 @@ services:
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
-    hostname: 'gitlab.example.com'
+    hostname: 'gitlab'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.example.com'
-        # Add any additional custom configuration here
+        external_url 'http://gitlab'
     ports:
       - '80:80'
       - '443:443'
@@ -16,3 +15,20 @@ services:
       - '$GITLAB_HOME/logs:/var/log/gitlab'
       - '$GITLAB_HOME/data:/var/opt/gitlab'
     shm_size: '256m'
+    networks:
+      - gitlab-net
+
+  gitlab-runner:
+    image: 'gitlab/gitlab-runner:latest'
+    restart: always
+    depends_on:
+      - gitlab
+    volumes:
+      - '$GITLAB_HOME/runner-config:/etc/gitlab-runner'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - gitlab-net
+
+networks:
+  gitlab-net:
+    driver: bridge
