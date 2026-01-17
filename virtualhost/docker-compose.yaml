@@ -1,9 +1,12 @@
 services:
-  nginx:
-    image: nginx:latest
-    container_name: nginx_proxy
+  reverse-proxy:
+    build: .
+    container_name: my-nginx-proxy
     ports:
       - "80:80"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    restart: unless-stopped
+    extra_hosts:
+      # Maps your custom strings to your computer's local IP
+      - "pihole-server:host-gateway"
+      - "wlingo-server:host-gateway"
+    # Ensure the container restarts if your computer reboots
+    restart: always
