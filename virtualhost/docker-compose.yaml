@@ -8,5 +8,6 @@ services:
       # Maps your custom strings to your computer's local IP
       - "pihole-server:host-gateway"
       - "wlingo-server:host-gateway"
+      - "pgadmin-server:host-gateway"
     # Ensure the container restarts if your computer reboots
     restart: always
