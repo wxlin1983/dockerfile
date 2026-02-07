@@ -1,2 +1,3 @@
 pihole/etc-pihole/*
 minio/data/*
+postgres/data/*
