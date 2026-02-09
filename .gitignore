@@ -1,3 +1,5 @@
 pihole/etc-pihole/*
 minio/data/*
 postgres/data/*
+postgres/postgres-data/*
+postgres/pgadmin-data/*

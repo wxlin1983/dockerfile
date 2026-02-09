@@ -5,10 +5,11 @@ services:
     hostname: 'postgres'
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - '5432:5432'
     volumes:
-      - '$POSTGRES_HOME/data:/var/lib/postgresql/data'
+      - '$POSTGRES_HOME/data:/var/lib/postgresql'
     networks:
       - postgres-net
 
@@ -31,3 +32,4 @@ services:
 networks:
   postgres-net:
     driver: bridge
+    
